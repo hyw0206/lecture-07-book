@@ -1,0 +1,39 @@
+.wrapper {
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.searchResult {
+  margin-bottom: 16px;
+}
+
+.bookWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: white;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 8px;
+}
+
+.bookImage {
+  width: 64px;
+}
+
+.bookInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bookAuthors {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
