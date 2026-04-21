@@ -5,15 +5,15 @@ import Detail from "./routes/Detail.tsx";
 import "./styles/global.css";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path={"/"} element={<Home />} />
-                <Route path={"/search"} element={<Search />} />
-                <Route path={"/detail/:id"} element={<Detail />} />
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<Home />} />
+        <Route path={"/search"} element={<Search />} />
+        <Route path={"/detail/:id"} element={<Detail />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
