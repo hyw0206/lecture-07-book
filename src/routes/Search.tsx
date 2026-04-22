@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
-import styles from "./Search.module.css";
+import styled from "styled-components";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -20,6 +20,49 @@ type BookType = {
 
 type ApiResponseType = { items: BookType[] };
 
+const Wrap = styled.div`
+  padding: 30px;
+`;
+
+const Item = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  transition: all 0.5s;
+  :hover {
+    background-color: #f3f3f3;
+  }
+`;
+
+const Cover = styled.img`
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+`;
+
+const NoCover = styled.div`
+  width: 60px;
+  height: 90px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  font-weight: 600;
+  margin-bottom: 4px;
+`;
+const Authors = styled.div`
+  font-size: 12px;
+  color: #555;
+`;
 function Search() {
   // 사용자가 요청한 keyword를 받아서, 그것을 가지고 google API 요청을 하고, 받아온 결과를 화면에 출력해주는 일
 
@@ -48,34 +91,30 @@ function Search() {
   }, [keyword]);
 
   return (
-    <div className={styles.wrap}>
+    <Wrap>
       <h3>검색 결과 : {keyword}</h3>
 
       {/* 검색 결과 (책 목록) 출력 */}
       {/* 데이터가 도착했는지 안했는지, 목록이 있는지 없는지 판단 해줘야 되나? */}
       {list.map((value, index) => (
-        <Link key={index} to={`/detail/${value.id}`} className={styles.item}>
+        <Item key={index} to={`/detail/${value.id}`}>
           {value.volumeInfo.imageLinks ? (
-            <img
-              src={value.volumeInfo.imageLinks?.thumbnail}
-              alt={value.volumeInfo.title}
-              className={styles.cover}
-            />
+            <Cover src={value.volumeInfo.imageLinks?.thumbnail} alt={value.volumeInfo.title} />
           ) : (
-            <div className={styles.noCover}>No Cover</div>
+            <NoCover>No Cover</NoCover>
           )}
           <div>
-            <div className={styles.title}>{value.volumeInfo.title}</div>
+            <Title>{value.volumeInfo.title}</Title>
             {/*
                             array에서 사용할 수 있는 메소드 join(스트링)
                             각 요소를 순회해서 하나의 값을 리턴하는데
                             각 요소 사이에 [매개변수로 제공된 스트링]을 넣어준다.
                         */}
-            <div className={styles.authors}>{value.volumeInfo.authors?.join(", ")}</div>
+            <Authors>{value.volumeInfo.authors?.join(", ")}</Authors>
           </div>
-        </Link>
+        </Item>
       ))}
-    </div>
+    </Wrap>
   );
 }
 

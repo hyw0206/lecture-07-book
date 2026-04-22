@@ -1,6 +1,28 @@
 import { useNavigate } from "react-router";
-import styles from "./SearchBar.module.css";
 import { type ChangeEvent, type SubmitEvent, useState } from "react";
+import styled from "styled-components";
+
+const Box = styled.form`
+  display: flex;
+  gap: 10px;
+  width: 100%;
+`;
+
+const Button = styled.button`
+  padding: 12px 18px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+`;
 
 function SearchBar() {
   // 사용자에게 입력을 받아서, 그걸 /search 라고 하는 주소로 강제 이동 시켜야됨
@@ -20,12 +42,10 @@ function SearchBar() {
   };
 
   return (
-    <form className={styles.box} onSubmit={onSubmit}>
-      <input className={styles.input} onChange={onChange} />
-      <button type={"submit"} className={styles.button}>
-        검색
-      </button>
-    </form>
+    <Box onSubmit={onSubmit}>
+      <Input onChange={onChange} />
+      <Button type={"submit"}>검색</Button>
+    </Box>
   );
 }
 
